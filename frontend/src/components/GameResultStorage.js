@@ -1,4 +1,4 @@
-const API = import.meta.env.VITE_API_URL || 'http://localhost:9000'
+const API = import.meta.env.VITE_API_URL ?? 'http://localhost:9000'
 
 export async function getGameResults(gameType = null, limit = 30) {
   const params = new URLSearchParams({ limit: String(limit) })

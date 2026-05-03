@@ -4,7 +4,7 @@ import { notifyGameResultUpdated } from './GameResultStorage'
 import GameResultPanel from './GameResultPanel'
 import ArcadeFrame from './ArcadeFrame'
 import StarField from './StarField'
-const API = import.meta.env.VITE_API_URL || 'http://localhost:9000'
+const API = import.meta.env.VITE_API_URL ?? 'http://localhost:9000'
 
 // ─────────────────────────────────────────────────────────
 // 이미지 설정: frontend/public/ 폴더에 파일을 넣고 경로를 지정하세요.

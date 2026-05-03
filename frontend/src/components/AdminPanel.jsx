@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import './AdminPanel.css'
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:9000'
+const API = import.meta.env.VITE_API_URL ?? 'http://localhost:9000'
 
 const DEFAULT_SETTINGS = {
   oddeven_win_rate: 40,
