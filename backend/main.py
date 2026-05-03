@@ -9,6 +9,7 @@ from uuid import uuid4
 
 from fastapi import FastAPI, Header, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 app = FastAPI()
@@ -457,3 +458,8 @@ def clear_results(
         else:
             conn.execute("DELETE FROM game_results")
     return {"ok": True}
+
+
+_dist_dir = Path(__file__).parent / "dist"
+if _dist_dir.exists():
+    app.mount("/", StaticFiles(directory=_dist_dir, html=True), name="static")
