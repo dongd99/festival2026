@@ -243,27 +243,25 @@ export default function SnailRacing({ onBack }) {
   //          the Roulette component receives `result` on its first render
   //          with spinning=true and can animate to the correct segment.
   const startSpin = async () => {
-    try{
-      console.log('spin start')
-    const res = await fetch(`${API}/snail/spin`)
-    if (!res.ok) {
-      throw new Error(`spin API error: ${res.status}`)
+    if (submitting) return
+    setSubmitting(true)
+    try {
+      const res = await fetch(`${API}/snail/spin`)
+      if (!res.ok) throw new Error(`spin API error: ${res.status}`)
+      const data = await res.json()
+      if (![3, 5, 7, 10].includes(data.multiplier)) throw new Error(`invalid multiplier: ${data.multiplier}`)
+      setGameId(data.game_id)
+      setMultiplier(data.multiplier)
+      setPhase(PHASES.SPINNING)
+      setTimeout(() => {
+        setSnails(Array.from({ length: data.multiplier }))
+        setPhase(PHASES.PICK)
+      }, 4500)
+    } catch (err) {
+      console.error('룰렛 시작 실패:', err)
+    } finally {
+      setSubmitting(false)
     }
-    const data = await res.json()
-     console.log('spin result:', data)
-     if (![3, 5, 7, 10].includes(data.multiplier)) {
-      throw new Error(`invalid multiplier: ${data.multiplier}`)
-    }
-    setGameId(data.game_id)
-    setMultiplier(data.multiplier)   // set FIRST
-    setPhase(PHASES.SPINNING)        // then start animation
-    setTimeout(() => {
-      setSnails(Array.from({ length: data.multiplier }))
-      setPhase(PHASES.PICK)
-    }, 4500)
-  }catch(err){
-    console.log('룰렛 시작 실패:', err)
-  }
   }
 
   const startRace = async () => {
@@ -310,7 +308,7 @@ return (
         screenBg={SCREEN_BG}
         onBack={onBack}
         bottomSlot={phase === PHASES.START && (
-          <button className="pixel-btn pixel-btn-yellow start-btn af-start-btn" onClick={startSpin}>
+          <button className="pixel-btn pixel-btn-yellow start-btn af-start-btn" onClick={startSpin} disabled={submitting}>
             ▶ GAME START
           </button>
         )}
