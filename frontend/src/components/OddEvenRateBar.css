@@ -1,0 +1,63 @@
+.odd-even-rate-box {
+  width: 100%;
+  max-width: 520px;
+  padding: 14px 18px;
+  box-sizing: border-box;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.45);
+  box-shadow: 4px 4px 0 #000;
+}
+
+.rate-title {
+  margin-bottom: 12px;
+  font-family: var(--pixel-font);
+  font-size: 17px;
+  color: var(--yellow);
+  text-align: center;
+}
+
+.rate-row {
+  display: grid;
+  grid-template-columns: 36px 1fr 90px;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.rate-row:last-child {
+  margin-bottom: 0;
+}
+
+.rate-label {
+  font-family: var(--pixel-font);
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+}
+
+.rate-bar {
+  height: 16px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  overflow: hidden;
+}
+
+.rate-fill {
+  height: 100%;
+  transition: width 0.35s ease;
+}
+
+.rate-fill.odd {
+  background: var(--purple);
+}
+
+.rate-fill.even {
+  background: var(--cyan);
+}
+
+.rate-text {
+  font-family: var(--pixel-font);
+  font-size: 13px;
+  color: #fff;
+  text-align: right;
+}

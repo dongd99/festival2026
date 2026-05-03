@@ -1,0 +1,373 @@
+.instruction-bar {
+  font-family: var(--pixel-font);
+  font-size: 16px;
+  color: var(--yellow);
+  text-shadow: 0 0 10px var(--yellow);
+  animation: blink 1.5s infinite;
+  text-align: center;
+}
+
+/* ── Roulette dialog ────────────────────────────── */
+.roulette-dialog {
+  background: var(--card-bg);
+  border: 6px solid var(--yellow);
+  box-shadow: 8px 8px 0 #000, 0 0 40px rgba(255, 215, 0, 0.35);
+  padding: 40px 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  animation: result-pop 0.3s ease;
+  min-width: 360px;
+}
+
+.roulette-dialog-title {
+  font-family: var(--pixel-font);
+  font-size: 23px;
+  color: var(--yellow);
+  text-shadow: 3px 3px 0 #8a7200;
+  letter-spacing: 2px;
+}
+
+.roulette-dialog-hint {
+  font-family: var(--pixel-font);
+  font-size: 12px;
+  color: var(--cyan);
+  text-shadow: 0 0 8px var(--cyan);
+  animation: blink 1.2s infinite;
+  text-align: center;
+  line-height: 1.8;
+}
+
+/* ── Roulette ───────────────────────────────────── */
+.roulette-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  margin: 10px 0;
+}
+
+.roulette-wrapper {
+  position: relative;
+  width: 240px;
+  height: 240px;
+}
+
+.roulette-pointer {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 36px;
+  color: #000;
+  text-shadow: 0 0 2px #fff, 0 0 8px rgba(255,255,255,0.75);
+  z-index: 10;
+}
+
+.roulette-wheel {
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  position: relative;
+  border: 6px solid var(--yellow);
+  box-shadow: 0 0 30px var(--yellow), 0 0 60px rgba(255,215,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* wheel-label: centered on wheel, then rotated to segment position */
+.wheel-label {
+  position: absolute;
+  top: calc(50% - 12px);
+  left: calc(50% - 18px);
+  width: 36px;
+  height: 24px;
+  transform-origin: 18px 12px; /* center of element = center of wheel after positioning */
+  font-family: var(--pixel-font);
+  font-size: 14px;
+  color: #fff;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.roulette-center {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #0d0b1e;
+  border: 4px solid var(--yellow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  font-family: var(--pixel-font);
+  font-size: 13px;
+  color: var(--yellow);
+}
+
+.spinning-text {
+  font-family: var(--pixel-font);
+  font-size: 18px;
+  color: var(--cyan);
+  animation: blink 0.6s infinite;
+}
+
+.start-btn {
+  font-size: 21px;
+  padding: 16px 36px;
+  animation: float 2s ease-in-out infinite;
+}
+
+/* ── Multiplier badge ───────────────────────────── */
+.multiplier-badge {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255,215,0,0.1);
+  border: 3px solid var(--yellow);
+  padding: 12px 28px;
+  box-shadow: 4px 4px 0 #000;
+  animation: slide-in 0.4s ease;
+}
+
+.mult-num {
+  font-family: var(--pixel-font);
+  font-size: 42px;
+  color: var(--yellow);
+  text-shadow: 3px 3px 0 #8a7200;
+}
+
+.mult-label {
+  font-family: var(--pixel-font);
+  font-size: 18px;
+  color: var(--white);
+}
+
+/* ── Snail tracks ───────────────────────────────── */
+.snail-tracks {
+  width: 100%;
+  max-width: 860px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.snail-track {
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  padding: 8px 12px;
+  transition: border-color 0.2s;
+}
+
+.snail-track.chosen {
+  border-color: var(--yellow);
+  background: rgba(255,215,0,0.06);
+  animation: chosen-track-blink 0.8s steps(2, end) infinite;
+}
+
+.snail-track.pickable {
+  cursor: pointer;
+}
+
+.snail-track.pickable:hover {
+  border-color: var(--cyan);
+}
+
+.track-row {
+  --track-name-width: 82px;
+  --track-start: calc(var(--track-name-width) + 18px);
+  --track-end-gap: 30px;
+  position: relative;
+  width: 100%;
+}
+
+.track-label {
+  font-family: var(--pixel-font);
+  font-size: 13px;
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: var(--track-name-width);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.track-name {
+  display: inline-block;
+  max-width: var(--track-name-width);
+  padding: 4px 6px;
+  background: #080816;
+  border: 1px solid currentColor;
+  box-shadow: 0 0 10px currentColor;
+  line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 0 6px currentColor, 1px 1px 0 #000;
+  opacity: 1;
+}
+
+.snail-track.chosen .track-name {
+  animation: chosen-name-blink 0.8s steps(2, end) infinite;
+}
+
+.track-lane {
+  position: relative;
+  height: 36px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  overflow: hidden;
+  width: 100%;
+}
+
+.finish-line {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: repeating-linear-gradient(
+    180deg,
+    #fff 0px,
+    #fff 6px,
+    #000 6px,
+    #000 12px
+  );
+}
+
+.snail-runner {
+  position: absolute;
+  top: 50%;
+  left: calc(var(--track-start) + (100% - var(--track-start) - var(--track-end-gap)) * var(--progress) / 100);
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: left 0.05s linear;
+}
+
+.snail-emoji {
+  font-size: 29px;
+  line-height: 1;
+  display: inline-block;
+  transform: scaleX(-1);
+}
+
+.rank-tag {
+  font-family: var(--pixel-font);
+  font-size: 10px;
+  color: var(--yellow);
+  white-space: nowrap;
+  animation: blink 0.5s infinite;
+}
+
+/* ── Pick actions ───────────────────────────────── */
+.pick-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.pick-hint {
+  font-family: var(--pixel-font);
+  font-size: 16px;
+  color: var(--cyan);
+  text-align: center;
+}
+
+/* ── Result panel ───────────────────────────────── */
+.result-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 32px 48px;
+  border: 4px solid var(--border-color);
+  box-shadow: 6px 6px 0 #000;
+  animation: slide-in 0.4s ease;
+  text-align: center;
+}
+
+.result-panel.win {
+  background: rgba(57, 255, 20, 0.08);
+  border-color: var(--green);
+}
+
+.result-panel.lose {
+  background: rgba(255, 77, 166, 0.08);
+  border-color: var(--pink);
+}
+
+.result-emoji {
+  font-size: 73px;
+  animation: star-burst 0.6s ease forwards;
+}
+
+.result-title {
+  font-family: var(--pixel-font);
+  font-size: 36px;
+  color: var(--yellow);
+  text-shadow: 4px 4px 0 #8a7200, 0 0 20px var(--yellow);
+}
+
+.result-panel.lose .result-title {
+  color: var(--pink);
+  text-shadow: 4px 4px 0 #8a0047;
+}
+
+.result-detail {
+  font-family: var(--pixel-font);
+  font-size: 18px;
+  color: var(--white);
+}
+
+.result-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.snail-track {
+  transition: transform 0.25s ease, filter 0.25s ease;
+  transform-origin: center center;
+}
+
+.snail-track:hover {
+  transform: scale(1.04);
+  filter: brightness(1.08);
+}
+
+@keyframes chosen-track-blink {
+  0%, 100% {
+    border-color: var(--yellow);
+    box-shadow: 0 0 22px rgba(255, 215, 0, 0.95), inset 0 0 14px rgba(255, 215, 0, 0.35);
+  }
+
+  50% {
+    border-color: var(--white);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.65), inset 0 0 8px rgba(255, 255, 255, 0.2);
+  }
+}
+
+@keyframes chosen-name-blink {
+  0%, 100% {
+    filter: brightness(1.35);
+    box-shadow: 0 0 14px currentColor;
+  }
+
+  50% {
+    filter: brightness(0.75);
+    box-shadow: 0 0 4px currentColor;
+  }
+}

@@ -1,0 +1,328 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+}
+
+@font-face {
+  font-family: 'DungGeunMo';
+  src: url('/fonts/DungGeunMo.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --pixel-font: 'DungGeunMo', 'Press Start 2P', monospace;
+  --bg: #0d0b1e;
+  --bg2: #1a1535;
+  --yellow: #ffd700;
+  --pink: #ff4da6;
+  --cyan: #00e5ff;
+  --green: #39ff14;
+  --purple: #b44fff;
+  --orange: #ff8c00;
+  --white: #ffffff;
+  --card-bg: #1e1b3a;
+  --border-color: #4a3f7a;
+}
+
+body {
+  font-family: var(--pixel-font);
+  background-color: var(--bg);
+  color: var(--white);
+  min-height: 100vh;
+  image-rendering: pixelated;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* pixel border utility */
+.pixel-border {
+  border: 4px solid var(--border-color);
+  box-shadow: 4px 4px 0 #000, inset 0 0 0 2px rgba(255,255,255,0.05);
+}
+
+.pixel-btn {
+  font-family: var(--pixel-font);
+  font-size: 18px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  image-rendering: pixelated;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  transition: transform 0.1s;
+}
+
+.pixel-btn:active {
+  transform: translateY(2px);
+}
+
+.pixel-btn-yellow {
+  background: var(--yellow);
+  color: #000;
+  box-shadow: 4px 4px 0 #8a7200, 2px 2px 0 #a08800;
+}
+.pixel-btn-yellow:hover { background: #ffe44d; }
+
+.pixel-btn-pink {
+  background: var(--pink);
+  color: #fff;
+  box-shadow: 4px 4px 0 #8a0047, 2px 2px 0 #a00055;
+}
+.pixel-btn-pink:hover { background: #ff70ba; }
+
+.pixel-btn-cyan {
+  background: var(--cyan);
+  color: #000;
+  box-shadow: 4px 4px 0 #007a8a, 2px 2px 0 #009aaa;
+}
+.pixel-btn-cyan:hover { background: #4df0ff; }
+
+.pixel-btn-green {
+  background: var(--green);
+  color: #000;
+  box-shadow: 4px 4px 0 #1a8a00, 2px 2px 0 #22aa00;
+}
+.pixel-btn-green:hover { background: #66ff4d; }
+
+.pixel-btn-purple {
+  background: var(--purple);
+  color: #fff;
+  box-shadow: 4px 4px 0 #5a1a99, 2px 2px 0 #7020bb;
+}
+.pixel-btn-purple:hover { background: #c96fff; }
+
+/* scanline overlay for retro effect */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 1px,
+    rgba(0,0,0,0.035) 1px,
+    rgba(0,0,0,0.035) 2px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+@keyframes spin-roulette {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes slide-in {
+  from { transform: translateY(-30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes star-burst {
+  0% { transform: scale(0) rotate(0deg); opacity: 0; }
+  50% { transform: scale(1.3) rotate(180deg); opacity: 1; }
+  100% { transform: scale(1) rotate(360deg); opacity: 1; }
+}
+
+@keyframes march {
+  0% { left: -60px; }
+  100% { left: 110%; }
+}
+
+@keyframes result-pop {
+  0%   { transform: scale(0.7); opacity: 0; }
+  60%  { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+/* ── 공유 게임 페이지 레이아웃 ───────────────────────────
+   OddEvenGame / SnailRacing 모두 이 클래스를 사용.
+   배경을 메인 메뉴와 동일한 다크 아케이드 테마로 통일. */
+.game-page-layout {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 22px 24px 42px;
+  background: radial-gradient(ellipse at center, #1a1050 0%, #0d0b1e 70%);
+  overflow: hidden;
+}
+
+@media (max-width: 760px) {
+  .game-page-layout {
+    padding: 14px 10px 80px;
+    gap: 0;
+  }
+
+  .game-play-area {
+    width: 100%;
+  }
+}
+
+.game-play-area {
+  flex: 1;
+  max-width: 1120px;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* ── 픽셀 결과 사이드 패널 ─────────────────────────────── */
+.game-result-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--card-bg);
+  border: 4px solid var(--border-color);
+  box-shadow: 6px 6px 0 #000;
+}
+
+.game-result-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 3px solid var(--border-color);
+  background: #151230;
+}
+
+.game-result-sidebar-header h2 {
+  font-family: var(--pixel-font);
+  font-size: 17px;
+  color: var(--yellow);
+  text-shadow: 2px 2px 0 #8a7200;
+  letter-spacing: 1px;
+}
+
+.game-result-sidebar-body {
+  padding: 14px 16px;
+  overflow: visible;
+}
+
+.game-result-empty {
+  font-family: var(--pixel-font);
+  font-size: 12px;
+  color: #555;
+  text-align: center;
+  padding: 20px 0;
+  line-height: 2;
+}
+
+.game-result-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.game-result-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
+  border: 2px solid var(--border-color);
+  background: rgba(255,255,255,0.02);
+}
+
+.game-result-index {
+  font-family: var(--pixel-font);
+  font-size: 13px;
+  color: #666;
+  width: 28px;
+  flex-shrink: 0;
+}
+
+.game-result-value {
+  font-family: var(--pixel-font);
+  font-size: 17px;
+  color: var(--white);
+  flex: 1;
+  line-height: 1.35;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.game-result-multiplier {
+  font-size: 11px;
+  padding: 2px 6px;
+  border: 2px solid currentColor;
+  opacity: 0.75;
+  flex-shrink: 0;
+}
+
+/* ── 픽셀 결과 다이얼로그 (달팽이 결과창) ────────────────── */
+.result-dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.result-dialog {
+  background: var(--card-bg);
+  border: 6px solid var(--border-color);
+  box-shadow: 8px 8px 0 #000;
+  padding: 52px 68px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  animation: result-pop 0.3s ease;
+  min-width: 480px;
+}
+
+.result-dialog.win {
+  border-color: var(--yellow);
+  background: rgba(30, 20, 5, 0.95);
+  box-shadow: 8px 8px 0 #000, 0 0 30px rgba(255,215,0,0.25);
+}
+
+.result-dialog.lose {
+  border-color: var(--pink);
+  background: rgba(30, 5, 15, 0.95);
+  box-shadow: 8px 8px 0 #000, 0 0 30px rgba(255,77,166,0.2);
+}
+
+.result-dialog .result-emoji  { font-size: 94px; animation: star-burst 0.5s ease forwards; }
+.result-dialog .result-title  { font-family: var(--pixel-font); font-size: 44px; color: var(--yellow); text-shadow: 3px 3px 0 #8a7200; }
+.result-dialog.lose .result-title { color: var(--pink); text-shadow: 3px 3px 0 #8a0047; }
+.result-dialog .result-detail { font-family: var(--pixel-font); font-size: 21px; color: var(--white); line-height: 2; }
+.result-dialog .result-actions { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-top: 12px; }
