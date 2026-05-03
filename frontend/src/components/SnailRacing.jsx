@@ -237,6 +237,7 @@ export default function SnailRacing({ onBack }) {
   const [win, setWin] = useState(false)
   const [gameId, setGameId] = useState(null)
   const [raceTimeline, setRaceTimeline] = useState(null)
+  const [submitting, setSubmitting] = useState(false)
 
   // BUG FIX: fetch result BEFORE setting SPINNING phase so that
   //          the Roulette component receives `result` on its first render
@@ -266,22 +267,25 @@ export default function SnailRacing({ onBack }) {
   }
 
   const startRace = async () => {
-    if (!gameId) return
-
-    const res = await fetch(`${API}/snail/race`,{
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({
-        game_id: gameId,
-        chosen
+    if (!gameId || submitting) return
+    setSubmitting(true)
+    try {
+      const res = await fetch(`${API}/snail/race`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ game_id: gameId, chosen })
       })
-    })
-    const data = await res.json()
-
-    setWinner(data.winner)
-    setWin(data.win)
-    setRaceTimeline(data.timeline)
-    setPhase(PHASES.RACING)
+      if (!res.ok) throw new Error(`race error: ${res.status}`)
+      const data = await res.json()
+      setWinner(data.winner)
+      setWin(data.win)
+      setRaceTimeline(data.timeline)
+      setPhase(PHASES.RACING)
+    } catch (err) {
+      console.error('레이스 실패:', err)
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const reset = () => {
@@ -331,8 +335,8 @@ return (
                 <button
                   className="pixel-btn pixel-btn-yellow start-btn"
                   onClick={startRace}
-                  disabled={chosen === null}
-                  style={{ opacity: chosen === null ? 0.4 : 1 }}
+                  disabled={chosen === null || submitting}
+                  style={{ opacity: chosen === null || submitting ? 0.4 : 1 }}
                 >
                   ▶ RACE START!
                 </button>
