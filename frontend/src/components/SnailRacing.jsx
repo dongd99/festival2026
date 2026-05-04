@@ -11,8 +11,8 @@ const API = import.meta.env.VITE_API_URL ?? 'http://localhost:9000'
 // null 이면 기본 스타일 사용
 const SCREEN_BG = 'https://i.pinimg.com/736x/ac/8b/02/ac8b023583e668ac5503ca4f01f432ca.jpg'   // 게임 화면 배경 (예: '/snail-bg.jpg')
 // ─────────────────────────────────────────────────────────
-const SNAIL_COLORS = ['#ff4da6', '#00e5ff', '#ffd700', '#39ff14', '#b44fff', '#ff8c00', '#ff4444', '#44ff88', '#ffffff', '#88ffff']
-const SNAIL_NAMES = ['핑쿠루', '아쿠아', '골져스', '그린이', '퍼푸리', '오란줴줴이', '레드썬', '민트초코', '흰둥이', '스카이']
+const SNAIL_COLORS = ['#ff4da6', '#00e5ff', '#ffd700', '#39ff14', '#b44fff', '#ff8c00', '#ff4444', '#89ffb4', '#ffffff', '#88ffff']
+const SNAIL_NAMES = ['핑쿠루삥뽕', '물의호흡', '골져스', '그린이', '퍼푸리', '오렌줴줴이', '레드썬', '민초단', '흰둥이', '스카이']
 
 const ROULETTE_SEGMENTS = [3, 5, 7, 10, 3, 5, 7, 10]
 const SEG_COLORS = ['#ff4da6', '#b44fff', '#00e5ff', '#ffd700', '#ff4da6', '#b44fff', '#00e5ff', '#ffd700']
@@ -158,7 +158,8 @@ function SnailTrack({ snails, chosen, racing, timeline, onSelect, phase, onRaceE
                 className="snail-runner"
                 style={{ '--progress': positions[i] ?? 0 }}
               >
-                <span className="snail-emoji">🐌</span>
+                <span className="snail-emoji" >🐌</span>
+
 
                 {finishOrder.indexOf(i) === 0 && <span className="rank-tag">🏆1st</span>}
                 {finishOrder.indexOf(i) === 1 && <span className="rank-tag">🥈2nd</span>}
