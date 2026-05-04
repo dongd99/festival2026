@@ -259,7 +259,6 @@
   font-size: 29px;
   line-height: 1;
   display: inline-block;
-  transform: scaleX(-1);
 }
 
 .rank-tag {
