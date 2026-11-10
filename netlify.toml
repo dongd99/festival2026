@@ -1,0 +1,15 @@
+[build]
+  command = "npm ci --prefix frontend && npm run build --prefix frontend"
+  publish = "frontend/dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[functions]
+  directory = "netlify/functions"
+
+# Single-page app: serve index.html for any unknown path
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
