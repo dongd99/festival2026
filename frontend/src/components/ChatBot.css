@@ -90,7 +90,9 @@
   border: 2px solid var(--yellow);
   cursor: pointer;
 }
-.chatbot-option:hover { background: var(--yellow); color: #000; }
+.chatbot-option:hover:not(:disabled) { background: var(--yellow); color: #000; }
+.chatbot-option:disabled { opacity: 0.5; cursor: wait; }
+.chatbot-typing { color: #aaa; animation: blink 1s step-end infinite; }
 
 .chatbot-bets {
   margin-top: 8px;
