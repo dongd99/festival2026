@@ -1,7 +1,7 @@
 .chatbot-fab {
   position: fixed;
   right: 20px;
-  bottom: 20px;
+  top: 20px;
   z-index: 1000;
   width: 60px;
   height: 60px;
@@ -21,7 +21,7 @@
 .chatbot-window {
   position: fixed;
   right: 20px;
-  bottom: 92px;
+  top: 92px;
   z-index: 1000;
   width: 340px;
   max-width: calc(100vw - 32px);
