@@ -3,6 +3,7 @@ import MainMenu from './components/MainMenu'
 import OddEvenGame from './components/OddEvenGame'
 import SnailRacing from './components/SnailRacing'
 import AdminPanel from './components/AdminPanel'
+import ChatBot from './components/ChatBot'
 
 export default function App() {
   const [screen, setScreen] = useState('menu')
@@ -13,6 +14,7 @@ export default function App() {
       {screen === 'oddeven' && <OddEvenGame onBack={() => setScreen('menu')} />}
       {screen === 'snail' && <SnailRacing onBack={() => setScreen('menu')} />}
       {screen === 'admin' && <AdminPanel onBack={() => setScreen('menu')} />}
+      {screen !== 'admin' && <ChatBot />}
     </div>
   )
 }
